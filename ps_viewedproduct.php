@@ -247,6 +247,12 @@ class Ps_Viewedproduct extends Module implements WidgetInterface
 
             if (is_array($productIds)) {
                 foreach ($productIds as $productId) {
+                    
+                    //If the product is inactive, it is not displayed
+                    $vp_product = new Product($productId);
+                    if ($vp_product->active == 0) {
+                        continue;
+                    }
                     if ($idProductPage != $productId) {
                         $products_for_template[] = $presenter->present(
                             $presentationSettings,
